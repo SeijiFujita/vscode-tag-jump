@@ -19,29 +19,17 @@ export function deactivate() {
 //-------------------------------------------------------------------
 
 export class tagController {
-  private tagJump_enable: boolean;
   private quiet: boolean;
-  private baseDirectory: string;
-  //private fileNameRE_01: string;
-  //private fileLineRE_01: string;
-  // private fileColumnRE_01: string;
-
+  
   constructor() {
-    //
-    this.baseDirectory = path.dirname(vscode.window.activeTextEditor.document.fileName);
-    console.log('baseDirectory: ', this.baseDirectory);
-    //
-    this.tagJump_enable = false;
-    if (this.baseDirectory != null && this.baseDirectory.length != 0) {
-        this.tagJump_enable = true;
-        //
-        const config = vscode.workspace.getConfiguration('tagjump');
-        this.quiet = config.get('quiet', false);
-        //this.fileNameRE_01 = config.get('fileNameRE_01', '^(.+):\d+.*');
-        //this.fileLineRE_01 = config.get('fileLineRE_01', '^.+:(\d+).*');
-        // this.fileColumnRE_01 = config.get('fileColumnRE_01', '^.+:\(\d+,(\d+)\).*');
-    }
+    console.log('this.workSpacePath: ', vscode.workspace.rootPath);
+    console.log('activePath: ' , path.dirname(vscode.window.activeTextEditor.document.fileName));
+
+    const config = vscode.workspace.getConfiguration('tagjump');
+    this.quiet = config.get('quiet', false);
+ 
   }
+
 /*
   //
   private tagParcer(tagLine: string) : string {
@@ -59,11 +47,10 @@ export class tagController {
   // Search the block of <filename>:<line-number><space> and do a tag-jump
   // You can open the file even if you failed to get <line-number>
   public tag_Jump(): void {
-    if (this.tagJump_enable) {
       // Get the line indicated by the editor's caret
       const tagLine: string = this.getLine();
       
-      if (tagLine != null && tagLine.length >= 3) { // Minimum filename, size = 3 // a:1
+      if (tagLine != null && tagLine.length >= 1) { // Minimum filename, size = 1 // a:1, /a, a
         
         // Format to file name and line-number
         // <space or tab><filename>:<line-number><space><any strings...>
@@ -78,7 +65,6 @@ export class tagController {
         
         // Specify filename and open editor
         this.openFile(fileName, Number(flineNum));
-      }
     }
   }
 
@@ -107,6 +93,8 @@ export class tagController {
   private getFullPath(fileName: string): string {
     const win32: boolean = process.platform === 'win32';
     const pathSeparator: string = win32 ? '\\' : '/';
+    const basePath: string  = path.dirname(vscode.window.activeTextEditor.document.fileName);
+    console.log('basePath: ', basePath);
     let tagPath: string; 
     //
     function homedir(): string {
@@ -115,13 +103,25 @@ export class tagController {
     // check HOME
     if (fileName.indexOf('~') === 0) {
       tagPath = homedir() + pathSeparator + fileName.substr(1);
-    // check root directory
+    // check full path directory
     } else if (fileName.indexOf('/') === 0) {
       tagPath = win32 ? fileName.substr(1) : fileName;
-    // normal 
+    // Untitled file 
+    } else if (basePath === '.') {
+      const workspacePath = vscode.workspace.rootPath;
+      console.log('workspacePath: ', workspacePath);
+      // check worksapce
+      if (workspacePath === 'undefind') {
+        tagPath = workspacePath + pathSeparator + fileName;
+      } else {
+        tagPath = '';
+      }
+    // normal
     } else {
-      tagPath = this.baseDirectory + pathSeparator + fileName;
+      tagPath = basePath + pathSeparator + fileName;
     }
+    console.log('tagPath: ', tagPath);
+    console.log('tagPath.length: ', tagPath.length);
     return tagPath;
   }
   
@@ -165,7 +165,7 @@ export class tagController {
       });
     } // if (fileExists)
     else {
-          vscode.window.showErrorMessage('Could not open file, please specify correct tag jump/ファイルを開けませんでした、正しいタグジャンプを指定してください.');
+      vscode.window.showErrorMessage('Could not open file, please specify correct tag jump\nファイルを開けませんでした、正しいタグジャンプを指定してください.');
     }
   }
 }
