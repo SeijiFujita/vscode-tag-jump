@@ -164,8 +164,11 @@ export class tagController {
           // debugger;
       });
     } // if (fileExists)
-    else {
-      vscode.window.showErrorMessage('Could not open file, please specify correct tag jump\nファイルを開けませんでした、正しいタグジャンプを指定してください.');
+    else if (this.quiet) {
+        const msg: string = 'Could not open file. ' + fullPath;
+        //const msg: string = 'ファイルを開けませんでした ' + fullPath;
+        vscode.window.showErrorMessage(msg);
+      }
     }
   }
 }

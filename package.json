@@ -40,15 +40,15 @@
             "title": "Tag-Jump: Open a file with tag information"
         }],
        "configuration": {
-            "properties": {
-                "tagjump.bingTransId": {
-                    "default": "tagjump",
-                    "description": "Your client id",
-                    "type": "string"
-                }
-            },
             "title": "Tag-Jump Configuration",
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "tagjump.quiet": {
+                    "default": true,
+                    "description": "do not display an error message",
+                    "type": "boolean"
+                }
+            }
         },
         "menus": {
             "editor/context": [
@@ -60,8 +60,9 @@
         },
         "keybindings": [
             {
+                "key": "Alt+f10",
                 "command": "extension.tagJump",
-                "key": "Alt+f10"
+                "when": "editorTextFocus"
             }
         ]
     },
