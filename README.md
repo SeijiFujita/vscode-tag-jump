@@ -1,5 +1,6 @@
 
-![Tag-Jump logo](images/tagjump_logo.svg)
+![Tag-Jump logo](https://raw.githubusercontent.com/SeijiFujita/vscode-tagjump/master/images/tagjump_logo.svg)
+
 # Tag-Jump extension for Visual Studio Code 
 
 Tag-Jump opens the target file quickly with Tag information.
