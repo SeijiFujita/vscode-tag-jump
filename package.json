@@ -44,7 +44,7 @@
             "type": "object",
             "properties": {
                 "tagjump.quiet": {
-                    "default": true,
+                    "default": false,
                     "description": "do not display an error message",
                     "type": "boolean"
                 }
