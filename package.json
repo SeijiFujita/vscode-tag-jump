@@ -15,7 +15,7 @@
         "color": "#eeeeee",
         "theme": "light"
     },
-    "license": "MIT",
+    "license": "MIT, SEE LICENSE IN LICENSE.txt",
     "bugs": {
         "url": "https://github.com/SeijiFujita/vscode-tagjump/issues"
     },
@@ -26,9 +26,9 @@
     "homepage": "https://github.com/SeijiFujita/vscode-tagjump",
     "keywords": [
         "vscode-tagjump",
+        "vscode-tag-jump",
         "tagjump",
-        "tag-jump",
-        "extension"
+        "tag-jump"
     ],
     "activationEvents": [
         "onCommand:extension.tagJump"
@@ -44,9 +44,9 @@
             "type": "object",
             "properties": {
                 "tagjump.quiet": {
+                    "type": "boolean",
                     "default": false,
-                    "description": "do not display an error message",
-                    "type": "boolean"
+                    "description": "do not display an error message"
                 }
             }
         },

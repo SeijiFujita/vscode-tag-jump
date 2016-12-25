@@ -5,7 +5,7 @@
 Tag-Jump opens the target file quickly with Tag information.
 You can open the target file from grep search result, debug logs, compiler message and work efficiently.
 
-[Japanese](README_JPN.md)
+[Japanese](https://github.com/SeijiFujita/vscode-tagjump/blob/master/README_JPN.md)
 
 ## Usage
 
