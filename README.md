@@ -1,5 +1,4 @@
 
-![Tag-Jump logo](https://raw.githubusercontent.com/SeijiFujita/vscode-tagjump/master/images/tagjump_logo.svg)
 
 # Tag-Jump extension for Visual Studio Code 
 

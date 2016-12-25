@@ -2,15 +2,15 @@
     "name": "vscode-tag-jump",
     "displayName": "Tag-Jump",
     "description": "Add Tag-Jump function(Open a file with tag information /file.txt:10/) to vscode.",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "engines": {
         "vscode": "^1.5.0"
     },
     "categories": [
         "Other"
     ],
-    "publisher": "SeijiFujita",
-    "icon": "images/tagjump-logo300x.png",
+    "publisher": "seijifujita",
+    "icon": "images/tagjump-logo128x.png",
     "galleryBanner": {
         "color": "#eeeeee",
         "theme": "light"
