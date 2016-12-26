@@ -25,27 +25,10 @@ export class tagController {
   // private RE_columnNum: string;
   
   constructor() {
-    // console.log('this.workSpacePath: ', vscode.workspace.rootPath);
-    // console.log('activePath: ' , path.dirname(vscode.window.activeTextEditor.document.fileName));
-
     const config = vscode.workspace.getConfiguration('tagjump');
     this.quiet = config.get('quiet', false);
- 
   }
 
-/*
-  //
-  private tagParcer(tagLine: string) : string {
-    let result: string = null;
-    if (tagLine != null && tagLine.length >= 3) { // filename minimam size = 3 // a:1
-
-      let result = tagLine.split(' ');
-
-      // result: /<filename>:<linenum><space>/
-      return result[0];
-    }
-  }
-*/
   // Perform tag-jump.
   // Search the block of <filename>:<line-number><space> and do a tag-jump
   // You can open the file even if you failed to get <line-number>
@@ -53,30 +36,24 @@ export class tagController {
       // Get the line indicated by the editor's caret
       const tagLine: string = this.getLine();
       
-      if (tagLine != null && tagLine.length >= 1) { // Minimum filename, size = 1 // a:1, /a, a
-        
+      if (tagLine.length >= 1) { // Minimum filename, size = 1 // a:1, /a, a
         // Format to file name and line-number
-        // <space or tab><filename>:<line-number><space><any strings...>
-        const line1 = tagLine.replace(/^[ \t]/, '').split(' ');
         // <filename>:<line-number>
-        const line2 = line1[0].split(':'); 
-        const fileName: string = line2[0];
-        const flineNum: string = line2[1];
-        //
-        // console.log('fileName: ', fileName);
-        // console.log('fLineNum: ', flineNum);
+        const splitLine = tagLine[0].split(':'); 
+        const fileName: string = splitLine[0];
+        const flineNum: string = splitLine[1];
+        // const columnNum: string = splitLine[3];
         
         // Specify filename and open editor
-        this.openFile(fileName, Number(flineNum));
+        this.openFile(fileName, Number(flineNum)); // ,Number(columnNum));
     }
   }
 
   // Get the editor's line, it is a string with cursor/Caret.
   private getLine() : string {
-    //
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
-        return "";
+        return '';
     }
     // make selection
     const position = editor.selection.active;
@@ -87,10 +64,14 @@ export class tagController {
     //        position.with(position.line, 0),
     //        position.with(position.line + 1, 0));
     //
-    const textLine = editor.document.getText(newSelection);
+    let textLine = editor.document.getText(newSelection);
     console.log('getline: ', textLine);
     console.log('getline.length: ', textLine.length);
-    return textLine.trim();
+    
+    // splitline <space or tab><filename>:<line-number><space><any strings...>
+    textLine = textLine.trim();
+    const lineArray = textLine.split(' ');
+    return lineArray[0];
   }
 
   //
