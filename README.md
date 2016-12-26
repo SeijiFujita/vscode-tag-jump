@@ -16,7 +16,7 @@ You can open the target file from grep search result, debug logs, compiler messa
 ## Features
 
 * Tag-Jump reads /path-fileName/:(colon)/line-number, and opens the file and moves the cursor to the line number position.
-* grep output results.
+* grep -n output results.
 
 <!-- ## Requirements -->
 
@@ -34,7 +34,7 @@ MarketPlace:
 
 ## License
 
-[MIT](LICENSE.txt)
+MIT LICENSE
 
 ## Release Notes
 
