@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('#--Congratulations, your extension "vscode-TagJump" is now active!');
+    console.log('#--Congratulations, your extension "vscode-Tag-Jump" is now active!');
     let disposable = vscode.commands.registerCommand('extension.tagJump', () => {
         let t = new tagController(); 
         t.tag_Jump();
@@ -20,10 +20,13 @@ export function deactivate() {
 
 export class tagController {
   private quiet: boolean;
+  // private RE_fileName: string;
+  // private RE_lineNum: string;
+  // private RE_columnNum: string;
   
   constructor() {
-    console.log('this.workSpacePath: ', vscode.workspace.rootPath);
-    console.log('activePath: ' , path.dirname(vscode.window.activeTextEditor.document.fileName));
+    // console.log('this.workSpacePath: ', vscode.workspace.rootPath);
+    // console.log('activePath: ' , path.dirname(vscode.window.activeTextEditor.document.fileName));
 
     const config = vscode.workspace.getConfiguration('tagjump');
     this.quiet = config.get('quiet', false);
@@ -60,8 +63,8 @@ export class tagController {
         const fileName: string = line2[0];
         const flineNum: string = line2[1];
         //
-        console.log('fileName: ', fileName);
-        console.log('fLineNum: ', flineNum);
+        // console.log('fileName: ', fileName);
+        // console.log('fLineNum: ', flineNum);
         
         // Specify filename and open editor
         this.openFile(fileName, Number(flineNum));
@@ -89,6 +92,7 @@ export class tagController {
     console.log('getline.length: ', textLine.length);
     return textLine.trim();
   }
+
   //
   private getFullPath(fileName: string): string {
     const win32: boolean = process.platform === 'win32';
@@ -97,25 +101,27 @@ export class tagController {
     console.log('basePath: ', basePath);
     let tagPath: string; 
     //
-    function homedir(): string {
-      return process.env['HOME'];
-    }
     // check HOME
     if (fileName.indexOf('~') === 0) {
-      tagPath = homedir() + pathSeparator + fileName.substr(1);
+      const homedir: string = process.env['HOME']; 
+      tagPath = homedir + pathSeparator + fileName.substr(1);
+
     // check full path directory
     } else if (fileName.indexOf('/') === 0) {
       tagPath = win32 ? fileName.substr(1) : fileName;
+
     // Untitled file 
     } else if (basePath === '.') {
-      const workspacePath = vscode.workspace.rootPath;
+      const workspacePath:string  = vscode.workspace.rootPath;
       console.log('workspacePath: ', workspacePath);
+
       // check worksapce
       if (workspacePath === 'undefind') {
         tagPath = workspacePath + pathSeparator + fileName;
       } else {
         tagPath = '';
       }
+
     // normal
     } else {
       tagPath = basePath + pathSeparator + fileName;
@@ -124,9 +130,9 @@ export class tagController {
     console.log('tagPath.length: ', tagPath.length);
     return tagPath;
   }
-  
+
   // open file.
-  private openFile(fileName: string, lineNum: number) {
+  private openFile(fileName: string, lineNum: number): void {
     const fullPath: string = this.getFullPath(fileName);
     // check open file
     const fileExists: boolean = fs.existsSync(fullPath);
@@ -142,7 +148,6 @@ export class tagController {
       // open file window
       vscode.workspace.openTextDocument(setting).then((doc: vscode.TextDocument) => {
         
-        // console.log('viewColumn: ', vscode.window.activeTextEditor.viewColumn);
         vscode.window.showTextDocument(doc, 1).then((editor: vscode.TextEditor) => {
           
           if (lineNum != null && lineNum > 1) {
@@ -164,11 +169,10 @@ export class tagController {
           // debugger;
       });
     } // if (fileExists)
-    else if (this.quiet) {
+    else if (!this.quiet) {
         const msg: string = 'Could not open file. ' + fullPath;
         //const msg: string = 'ファイルを開けませんでした ' + fullPath;
         vscode.window.showErrorMessage(msg);
-      }
     }
   }
 }
