@@ -30,7 +30,7 @@ You can open the target file from grep search result, debug logs, compiler messa
 
 GitHub: https://github.com/SeijiFujita/vscode-tag-jump
 
-MarketPlace: 
+MarketPlace: https://marketplace.visualstudio.com/items?itemName=seijifujita.vscode-tag-jump
 
 ## License
 
