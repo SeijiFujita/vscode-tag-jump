@@ -15,8 +15,26 @@ You can open the target file from grep search result, debug logs, compiler messa
 
 ## Features
 
-* Tag-Jump reads /path-fileName/:(colon)/line-number, and opens the file and moves the cursor to the line number position.
+* Tag-Jump reads |path-fileName|:(colon)|line-number|space|, and opens the file and moves the cursor to the line number position.
 * grep -n output results.
+
+### Tag-Jump support formats
+- |  path-filename  |  space  |
+- |  path-filename  |  :  |  space |
+- |  path-filename  |  :  |  line-num |  space  |
+- |  path-filename  |  :  |  line-num |  :  |  space  |
+- |  path-filename  |  :  |  (  |  line-num  |  )  |  space  |
+
+
+### Ignore spaces and tabs before file names.
+- |  space  or  tab  |  path-filename  |  :  |  line-num |  space  |
+
+### If '~' (tilde) is specified at the beginning of file name, directory of environment variable HOME is referenced.
+- |  '~' (tilde)  |  path-filename  |  :  |  line-num |  space  |
+
+### If you specify '/' (slash) at the beginning of the file name, the file is opened with the full path name.
+- |  '/' (slash)  |  path-filename  |  :  |  line-num |  space  |
+
 
 <!-- ## Requirements -->
 

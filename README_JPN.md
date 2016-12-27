@@ -7,9 +7,8 @@ grep の検索結果、デバッグログ、コンパイラのメッセージか
 
 ## Usage
 
-![Tag-Jump usage](https://raw.githubusercontent.com/SeijiFujita/vscode-tagjump/master/images/tagjump_usage.gif)
+![Tag-Jump usage](https://raw.githubusercontent.com/SeijiFujita/vscode-tag-jump/master/images/tagjump_usage.gif)
 <!-- ![Tag-Jump usage](images/tagjump_usage.gif) -->
-
 
 ## Features
 
@@ -19,19 +18,19 @@ grep の検索結果、デバッグログ、コンパイラのメッセージか
 1. 行番号の直後にはスペースを配置することで tag 情報と認識します。
 1. 基本的な Tag情報仕様は上記ですが、利便性を高めるための実装がされています。
 
-ファイル名の後に：(コロン/colon)、スペース、改行の場合ファイル名とします
+### ファイル名の後に：(コロン/colon)、スペース、改行の場合ファイル名とします
 * \<path-filename\>\<space or CR or LF\>
 * ex) readme.txt  , readme.txt: 
 
-ファイル名の前にスペース、タブは無視します
+### ファイル名の前にスペース、タブは無視します
 * ^\<space or tab\>\<path-filename\>:\<line-number\>\<space\>
 * ex) space or tab readme.txt:10
 
-ファイル名の先頭に'~'(チルダ)を指定すると環境変数 HOME をベースディレクトリとしてファイルの存在をチェックします
+### ファイル名の先頭に'~'(チルダ)を指定すると環境変数 HOME を参照してファイルを開きます
 * \<~\>\<path-filename\>\<space\>
 * ex) ~readme.txt, ~readme.txt:10 
 
-ファイル名の先頭に'/'(スラッシュ)を指定するとフルパス名が与えられたとしてフルパス名でファイルの存在をチェックします
+### ファイル名の先頭に'/'(スラッシュ)を指定するとフルパス名でファイルを開きます
 * \</\>\<path-filename\>\<space\>
 * ex) /C:\path\readme.txt, /C:\path\readme.txt:10, /tmp/file.txt, /usr/local/share/file.txt 
 
@@ -53,7 +52,8 @@ MarketPlace:
 
 ## Release Notes
 
-### 0.0.1
+
+### 1.0.1
 
 Initial release
 

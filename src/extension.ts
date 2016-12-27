@@ -39,11 +39,11 @@ export class tagController {
       if (tagLine.length >= 1) { // Minimum filename, size = 1 // a:1, /a, a
         // Format to file name and line-number
         // <filename>:<line-number>
-        const splitLine = tagLine[0].split(':'); 
+        const splitLine = tagLine.split(':'); 
         const fileName: string = splitLine[0];
-        const flineNum: string = splitLine[1];
+        // const flineNum: string = splitLine[1].replace('/(\d+)/g', '$1');
+        const flineNum: string = splitLine[1].replace(/\D*(\d+)\D*/, '$1');
         // const columnNum: string = splitLine[3];
-        
         // Specify filename and open editor
         this.openFile(fileName, Number(flineNum)); // ,Number(columnNum));
     }
