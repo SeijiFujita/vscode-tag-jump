@@ -3,6 +3,7 @@
 @rem vsce package --baseContentUrl "" --baseImagesUrl ""
 @rem --baseContentUrl --baseImagesUrl 
 
-vsce package 
+rem vsce package 
 
+rem vsce publish
 
