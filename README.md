@@ -56,9 +56,9 @@ MIT LICENSE
 
 ## Release Notes
 
-### 1.0.0  2016-12-27
+### 1.0.0
 
-Initial release
+Initial release / 2016-12-27
 
 
 **Enjoy!**

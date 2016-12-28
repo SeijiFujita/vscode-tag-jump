@@ -1,9 +1,8 @@
 
 # Tag-Jump extension for Visual Studio Code 
 
-Tag-Jump は Tag 情報により素早く目的のファイルを開きます。
-grep の検索結果、デバッグログ、コンパイラのメッセージからファイルを開き効率的に作業ができます。
-
+vscode タグジャンプ は grep の検索結果、デバッグログ、コンパイラのメッセージからファイルを開き効率的に作業ができます。
+emacs の grep-mode、秀丸エディタのタグジャンプ、サクラのタグジャンプなどと同じような操作がおこなえます。
 
 ## Usage
 
@@ -55,7 +54,7 @@ MarketPlace:
 
 ### 1.0.0
 
-Initial release
+Initial release / 2016-12-27
 
 
 **Enjoy!**
